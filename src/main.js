@@ -1,3 +1,11 @@
-const greeting = '你好查理';
+const http = require('http');
 
-console.log(greeting);
+const server = http.createServer((request, response) => {
+    response.write('hello~~~');
+    response.end();
+});
+
+
+server.listen(3000, () => {
+    console.log('🍖 服务已启动～！')
+});
