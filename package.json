@@ -8,5 +8,11 @@
   },
   "keywords": [],
   "author": "Charlie Dang",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.0"
+  },
+  "devDependencies": {
+    "typescript": "^3.9.5"
+  }
 }
