@@ -1,46 +1,42 @@
-const http = require('http');
+const express = require('express');
+const app = express();
+const port = 3000;
 
-const server = http.createServer((request, response) => {
-    // console.log(request['headers']['user-agent']);
+app.listen(port, () => {
+    console.log('🚀 服务已启动！')
+})
 
-    // response.writeHead(200, {
-    //     'Content-Type': 'text/html',
-    // });
-    // response.write('<input placeholder="shuru"/>');
-    // response.end();
-
-    // switch (request.url) {
-    //     case '/':
-    //         response.write("hello ~~");
-    //         break;
-    //     case '/posts':
-    //         response.write('posts');
-    //         break;
-    //     case '/signup':
-    //         response.write('signup');
-    //         break;
-    //     default:
-    //         response.writeHead(404);
-    //         response.write('404');
-    //         break;
-    // }
-    const data = {
-        id: 1,
-        title: '关山月',
-        content: '明月出天山，苍茫云海间'
-    };
-
-    const to_json = JSON.stringify(data);
-
-    response.writeHead(200, {
-        'Content-Type': 'application/json; charset=utf-8',
-    });
-
-    response.write(to_json);
-    response.end();
+app.get('/', (request, response) => {
+    response.send('你好👋')
 });
 
+const data = [
+    {
+        id:1,
+        title:'关山月',
+        content:'明月出天山，苍茫云海间'
+    },
+    {
+        id:2,
+        title:'望岳',
+        content:'会当凌绝顶，一览众山小'
+    },
+    {
+        id:3,
+        title:'忆江南',
+        content:'日出江花红胜火，春来江水绿如蓝'
+    }
+];
 
-server.listen(3000, () => {
-    console.log('🍖 服务已启动～！')
+app.get('/posts', (request, response) => {
+    response.send(data);
+});
+
+app.get('/posts/:postId', (request, response) => {
+    console.log("Rocket!")
+    //console.log(request);
+    const {postId} = request.params;
+
+    const posts = data.filter(item => item.id == postId);
+    response.send(posts[0]);
 });
