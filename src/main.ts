@@ -1,4 +1,5 @@
-const express = require('express');
+import express from 'express';
+import {Request, Response} from 'express';
 const app = express();
 const port = 3000;
 
@@ -11,7 +12,7 @@ app.listen(port, () => {
     console.log('🚀 服务已启动！')
 })
 
-app.get('/', (request, response) => {
+app.get('/', (request: Request, response: Response) => {
     response.send('你好👋')
 });
 
@@ -33,23 +34,23 @@ const data = [
     }
 ];
 
-app.get('/posts', (request, response) => {
+app.get('/posts', (request: Request, response: Response) => {
     response.send(data);
 });
 
-app.get('/posts/:postId', (request, response) => {
+app.get('/posts/:postId', (request: Request, response: Response) => {
     console.log("Rocket!")
     //console.log(request);
     const {postId} = request.params;
 
-    const posts = data.filter(item => item.id == postId);
+    const posts = data.filter(item => item.id == parseInt(postId, 10));
     response.send(posts[0]);
 });
 
 /**
  * 创建内容
  */
-app.post('/posts', (request, response) => {
+app.post('/posts', (request: Request, response: Response) => {
     // 获得请求里的数据
     //console.log(request);
     const {content} = request.body;
@@ -62,7 +63,7 @@ app.post('/posts', (request, response) => {
 
     // 设置响应头部数据
     response.set('Sing-Along', 'How I wonder what you are!');
-    console.log(response);
+    //console.log(response);
 
     // 返回客户端
     response.send({
