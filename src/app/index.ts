@@ -19,6 +19,11 @@ app.use(express.json());
 app.use(postRouter);
 
 /**
+ * 默认异常处理器
+ */
+app.use(defaultErrorHandler);
+
+/**
  * 导出应用
  */
 export default app;
